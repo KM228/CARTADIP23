@@ -9,6 +9,7 @@ class TileMap:
     mainMap = []
     entrLoc = [0, 0]
     exitLoc = [0, 0]
+    totalDifficulty = 0
 
     def __init__(self, mapSize, mapFormat):
 
@@ -60,6 +61,11 @@ class TileMap:
                     self.mainMap[i].append(GemSortingTile())
                 elif (SeedHandler.exprSeed(subSeed)) == 6:
                     self.mainMap[i].append(GemSearchTile())
+        #Uses seedHandler to generate and fill the map, represented by a 2D array
+        for i in range(self.mapSize):
+            for j in range(self.mapSize):
+                self.totalDifficulty += self.mainMap[i][j].getDifficulty()
+                #iterate through array to get total difficulty of map.
 
 
 
@@ -96,6 +102,11 @@ class TileMap:
                 else:
                     print(str(j), end=" \t ")
             print("")
+
+        print("Total Difficulty Rating: " + str(self.totalDifficulty), end=" (")
+        starRating = (self.totalDifficulty / (self.mapSize ** 2))
+        print("*" * int(starRating) + ")")
+        #Returns difficulty rating of a generated map as both a numerical value, and on a scale of 1 to 5 stars
 
         """
         out = ""
@@ -212,7 +223,7 @@ class GemAdditionTile(Tile):
         self.type = TileTypes.GEM
         self.isPuzzle = True
         self.isAnimated = True
-        self.difficulty = 3
+        self.difficulty = 2
         self.my_spritesheet = Spritesheet('sprites/tileSpritesheets/gemPuzzleSheet.png')
         self.numFrames = 4
         self.value = 10
@@ -241,7 +252,7 @@ class GemMultiplyTile(Tile):
         self.type = TileTypes.GEM
         self.isPuzzle = True
         self.isAnimated = True
-        self.difficulty = 3
+        self.difficulty = 2
         self.my_spritesheet = Spritesheet('sprites/tileSpritesheets/redGem.png')
         self.numFrames = 4
         self.value = 15
@@ -270,7 +281,7 @@ class GemSortingTile(Tile):
         self.type = TileTypes.GEM
         self.isPuzzle = True
         self.isAnimated = True
-        self.difficulty = 3
+        self.difficulty = 4
         self.my_spritesheet = Spritesheet('sprites/tileSpritesheets/greenGem.png')
         self.numFrames = 4
         self.value = 25
@@ -341,7 +352,7 @@ class HazTile(Tile):
 
     def __init__(self):
         self.type = TileTypes.HAZARD
-        self.difficulty = 3
+        self.difficulty = 1
         self.image = pygame.image.load('sprites/spikeFloor.png')
 
 

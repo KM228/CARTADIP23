@@ -37,7 +37,7 @@ else:
     mapSize = int(mapSize)
 newMap = TileMap(mapSize, mapType)
 
-print(newMap.getSize())
+#print(newMap.getSize())
 
 #print(SeedHandler.getRandom(4))
 newMap.showMap()
